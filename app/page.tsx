@@ -1,13 +1,10 @@
-import { auth } from "@clerk/nextjs/server";
+import { ModeToggle } from "@/components/toggle-button";
 
- 
 export default async function page() {
-
-  const isProtected = await auth.protect()
-  console.log("is", isProtected)
   return (
-    <>
-    home
-    </>
+    <div>
+      <h1>Home page - streaming app</h1>
+      <ModeToggle />
+    </div>
   );
 }

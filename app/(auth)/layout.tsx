@@ -1,5 +1,6 @@
 import "../globals.css";
- 
+import { ThemeProvider } from 'next-themes'
+
 
 export default function RootLayout({
   children,
@@ -9,7 +10,7 @@ export default function RootLayout({
   return (
        <html lang="en">
         <body 
-        className='flex items-center justify-center'
+        className='h-full flex items-center justify-center'
          >
           {children}
         </body>
