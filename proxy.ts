@@ -1,14 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-const isProtected = createRouteMatcher(['/sign-in(.*)'])
+const isProtected = createRouteMatcher(['/sign-in(.*)','/sign-up(.*)'])
 
 export default clerkMiddleware( async (auth,req)=>{
   if(!isProtected(req))
     await auth.protect() // this function automatically redirect to sign-in page
 
-},{
-  afterSignInUrl: '/dashboard',
-  afterSignUpUrl: '/dashboard'
 });
 
 

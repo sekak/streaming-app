@@ -26,10 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased flex items-center justify-center flex-col`}
         >
           <ThemeProvider
             attribute="class"
