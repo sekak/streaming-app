@@ -1,24 +1,20 @@
 "use client"
 
-import React from "react"
-import { ClerkProvider } from "@clerk/nextjs"
-import { dark as clerkDark } from "@clerk/themes"
-import { useTheme } from 'next-themes'
+import { ClerkProvider } from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
+import React, { useState } from 'react'
 
 export default function ClientClerkProvider({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
-  const { theme, setTheme } = useTheme()
-  console.log("====>", theme)
+}>) {
 
-  // next-themes resolves to 'dark' | 'light' | 'system' (resolvedTheme gives the active one)
-  // @clerk/themes doesn't always export a 'light' named theme in some versions,
-  // so only set baseTheme when in dark mode; otherwise let Clerk use its default.
-  const baseTheme = theme === "dark" ? clerkDark : undefined
+  const [theme, setTheme] = useState<string>(localStorage.getItem("theme") || "system")
 
-  return (
-    <ClerkProvider appearance={{ baseTheme }}>{children}</ClerkProvider>
-  )
-}
+  window.addEventListener("storage", () => {
+    setTheme(localStorage.getItem("theme") || "system")
+  })
+
+  return <ClerkProvider appearance={{baseTheme: theme === "light" ? "simple" : dark}}>{children}</ClerkProvider>
+}   
